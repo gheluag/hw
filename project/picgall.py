@@ -158,9 +158,9 @@ def find():
        
         match sel:
            
-            case "id художника":
+            case "имя художника":
                 
-                name = Label(findwindow, text = "введите ID художника", font = "georgia 8")
+                name = Label(findwindow, text = "введите имя художника", font = "georgia 8")
                 name.place(x = 200, y = 20)
                 name["bg"] = "#a49eba"
                 
@@ -209,7 +209,7 @@ def find():
 
     select = StringVar(findwindow)
     select.set("выберете парметр")
-    option = OptionMenu(findwindow, select, "id художника", "техника исполнения", "ценовая категория")
+    option = OptionMenu(findwindow, select, "имя художника", "техника исполнения", "ценовая категория")
     option.place(x = 30, y = 10, width = 150)
     option["bg"] = "#948eab"
     option["activebackground"] = "#7f7994"

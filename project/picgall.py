@@ -17,7 +17,8 @@ cursor.execute("""CREATE TABLE IF NOT EXISTS pictures(
  artistID integer,
  title text NOT NULL,
  medium text NOT NULL,
- price integer);""")
+ price integer,
+ FOREIGN KEY (artistID) REFERENCES artist_info (artistID));""")
 
 def find():
     window.withdraw()
@@ -97,22 +98,18 @@ def find():
         
     def opt():
         def name_find():
-        
-            # мы не разобрались как через имя выводить картины, поэтому задумка следующая
-            # должно было появиться окно с художниками из базы и оттуда уже можно было бы посмотреть id
-            # но оно не выводится нормально... выводит только последнюю запись
-            # пытались разными способами вывести, но результат один и тот же, в то время как в консоли все замечательно
-            # одну из попыток можно увидеть ниже (закомментированна)
 
             name = entry1.get()
             listbox = Listbox(findwindow)
             listbox.place(x = 0, y = 150, width = 500)
             listbox["bg"] = "#a49eba"
            
-            cursor.execute(f"SELECT * FROM pictures WHERE artistID = '{name}'")
-            for x in cursor.fetchall():
-                viv = f"pieceID: {x[0]}  artistID: {x[1]}   title: {x[2]}   medium: {x[3]}  price: {x[4]}\n\n\n"
-                listbox.insert(0, viv)
+            cursor.execute(f"SELECT * FROM artist_info WHERE name = '{name}'")
+            for na in cursor.fetchall():
+                cursor.execute(f"SELECT * FROM pictures WHERE artistId = '{na[0]}'")
+                for x in cursor.fetchall():
+                    viv = f"pieceID: {x[0]}  artistID: {x[1]}   title: {x[2]}   medium: {x[3]}  price: {x[4]}\n\n\n"
+                    listbox.insert(0, viv)
             
             label = Label(findwindow, text = "запомните id картины", font = "georgia 8")
             label.place(x = 20, y = 420)
@@ -175,14 +172,6 @@ def find():
                 button_op["bg"] = "#948eab"
                 button_op["activebackground"] = "#7f7994"
                 
-                # cursor.execute(f"SELECT * FROM artist_info  WHERE artistID >= 1")    
-                # for x in cursor.fetchall():
-                #     viv = f"artistId: {x[0]}  name: {x[1]}  adress: {x[2]}  town: {x[3]}  country: {x[4]}  postcode: {x[5]}\n\n"
-                #     listb = Listbox(findwindow)
-                #     listb.insert(0, viv)
-                #     listb.place(x = 0, y = 200, width = 500)
-                    # print(x)
-            
             case "техника исполнения":
                 
                 name = Label(findwindow, text = "введите технику исполнения", font = "georgia 8")

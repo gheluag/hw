@@ -235,9 +235,6 @@ def find():
     
 def insert():
 
-    # можно было бы сделать еще с доступом, потому что не каждый пользователь может добавлять, так ведь?
-    # но оно и так очень мудренное получилось...
-
     def clear():
         ent_addr.delete(0, END)
         ent_cou.delete(0, END)
@@ -398,6 +395,47 @@ def insert():
 
     ins.mainloop()
 
+def authorazi():
+    def autho():
+        log = ent_log.get()
+        passw = ent_passw.get()
+        cursor.execute(f"SELECT * FROM admins WHERE log = '{log}' AND passw = '{passw}'")
+        if not cursor.fetchone():
+            lab_err = Label(auth, text = "доступ запрещен", font = "georgia 8")
+            lab_err["bg"] = "#a49eba"
+            lab_err.place(x = 100, y = 170)
+            ent_log.delete(0, END)
+            ent_passw.delete(0, END)
+        else:
+            auth.withdraw()
+            insert()
+
+    
+    auth = Tk()
+    auth.geometry("300x200")
+    auth.title("auth")
+    auth["bg"] = "#a49eba"
+    
+    lab_log = Label(auth, text = "введите логин", font = "georgia 8")
+    lab_log["bg"] = "#a49eba"
+    lab_log.place(x = 100, y = 20)
+    
+    ent_log = Entry(auth)
+    ent_log.place(x = 90, y = 40)
+    
+    lab_passw = Label(auth, text = "введите пароль", font = "georgia 8")
+    lab_passw["bg"] = "#a49eba"
+    lab_passw.place(x = 100, y = 60)
+    
+    ent_passw = Entry(auth)
+    ent_passw.place(x = 90, y = 80)
+    
+    button_auth = Button(auth, text = "войти", command = autho, font = "georgia 8" )
+    button_auth.place(x = 120, y = 130)
+    button_auth["bg"] = "#948eab"
+    button_auth["activebackground"] = "#7f7994"
+
+    auth.mainloop()
 
 window = Tk()
 window.title("Picture Gallery")
@@ -422,7 +460,7 @@ label_ins = Label(window, text = "добавить информацию о ху�
 label_ins.place(x = 200, y = 100)
 label_ins["bg"] = "#a49eba"
 
-button_ins = Button(text = "нажми меня :)", command = insert, font = "georgia 8")
+button_ins = Button(text = "нажми меня :)", command = authorazi, font = "georgia 8")
 button_ins.place(x = 280, y = 120)
 button_ins["bg"] = "#948eab"
 button_ins["border"] = "2"

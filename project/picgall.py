@@ -451,7 +451,7 @@ def authorize():
     lab_passw["bg"] = "#a49eba"
     lab_passw.place(x = 100, y = 60)
     
-    ent_passw = Entry(auth)
+    ent_passw = Entry(auth, show = "*")
     ent_passw.place(x = 90, y = 80)
     
     button_auth = Button(auth, text = "войти", command = autho, font = "georgia 8" )

@@ -1,0 +1,8 @@
+для авторизации:
+log: chel
+passw: 123
+
+или
+
+log: kto
+passw: 456

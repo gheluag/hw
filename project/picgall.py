@@ -21,20 +21,27 @@ cursor.execute("""CREATE TABLE IF NOT EXISTS pictures(
  FOREIGN KEY (artistID) REFERENCES artist_info (artistID));""")
 
 def find():
+    
     window.withdraw()
-    def mm():
+    
+    def mainmenu():
         findwindow.withdraw()
         window.deiconify()
+    
     def buy():
+
         def mainm():
             buywin.withdraw()
             window.deiconify()
+
         def oformi():
             uspeh = Label(buywin, text = "успешно", font = "georgia 12")
             uspeh["bg"] = "#a49eba"
             uspeh.place(x = 180, y = 100)
+           
             kuplen = entry1.get()
             deliv = select.get()
+           
             cursor.execute(f"SELECT * FROM pictures WHERE pieceID = '{kuplen}'")
             for x in cursor.fetchall():
                 file = open("project/sold.txt", "a")
@@ -74,7 +81,7 @@ def find():
         select = StringVar(buywin)
         select.set("выберете способ доставки")
         option = OptionMenu(buywin, select, "самовывоз", "доставка")
-        option.place(x = 150, y = 10, width = 150)
+        option.place(x = 150, y = 10, width = 200)
         option["bg"] = "#948eab"
         option["activebackground"] = "#7f7994"
         
@@ -89,7 +96,7 @@ def find():
         button_q.place(x = 450, y = 270)
         
         button_mm = Button(buywin, text = "вернуться в главное меню", command = mainm, font = "georgia 8" )
-        button_mm.place(x = 300, y = 270)
+        button_mm.place(x = 270, y = 270)
         button_mm["bg"] = "#948eab"
         button_mm["activebackground"] = "#7f7994"
 
@@ -97,9 +104,10 @@ def find():
 
         
     def opt():
+
         def name_find():
 
-            name = entry1.get()
+            name = entry_name.get()
             listbox = Listbox(findwindow)
             listbox.place(x = 0, y = 150, width = 500)
             listbox["bg"] = "#a49eba"
@@ -117,9 +125,12 @@ def find():
             
             button_buy = Button(findwindow, text = "купить", command = buy, font = "georgia 8")
             button_buy.place(x = 20, y = 450)
+            button_buy["bg"] = "#948eab"
+            button_buy["activebackground"] = "#7f7994"
             
         def med_find():
-            tech = entry1.get()
+
+            tech = entry_med.get()
             listbox = Listbox(findwindow)
             listbox.place(x = 0, y = 150, width = 500)
             listbox["bg"] = "#a49eba"
@@ -129,15 +140,18 @@ def find():
                 viv = f"pieceID: {x[0]}  artistID: {x[1]}   title: {x[2]}   medium: {x[3]}  price: {x[4]}\n\n\n"
                 listbox.insert(0, viv)
             
-            label = Label(findwindow, text = "запомните id картины", font = "georgia 8")
-            label.place(x = 20, y = 420)
-            label["bg"] = "#a49eba"
+            label_buy = Label(findwindow, text = "запомните id картины", font = "georgia 8")
+            label_buy.place(x = 20, y = 420)
+            label_buy["bg"] = "#a49eba"
             
             button_buy = Button(findwindow, text = "купить", command = buy, font = "georgia 8")
             button_buy.place(x = 20, y = 450)
+            button_buy["bg"] = "#948eab"
+            button_buy["activebackground"] = "#7f7994"
         
         def price_find():
-            price = entry1.get()
+
+            price = entry_price.get()
             listbox = Listbox(findwindow)
             listbox.place(x = 0, y = 150, width = 500)
             listbox["bg"] = "#a49eba"
@@ -153,6 +167,8 @@ def find():
             
             button_buy = Button(findwindow, text = "купить", command = buy, font = "georgia 8")
             button_buy.place(x = 20, y = 450)
+            button_buy["bg"] = "#948eab"
+            button_buy["activebackground"] = "#7f7994"
         
         sel = select.get()
        
@@ -164,8 +180,8 @@ def find():
                 name.place(x = 200, y = 20)
                 name["bg"] = "#a49eba"
                 
-                entry1 = Entry(findwindow)
-                entry1.place(x = 200, y = 50)
+                entry_name = Entry(findwindow)
+                entry_name.place(x = 200, y = 50)
                 
                 button_op = Button(findwindow, text = "найти", command = name_find)
                 button_op.place(x = 200, y = 90)
@@ -174,12 +190,12 @@ def find():
                 
             case "техника исполнения":
                 
-                name = Label(findwindow, text = "введите технику исполнения", font = "georgia 8")
-                name.place(x = 200, y = 20)
-                name["bg"] = "#a49eba"
+                label_med = Label(findwindow, text = "введите технику исполнения", font = "georgia 8")
+                label_med.place(x = 200, y = 20)
+                label_med["bg"] = "#a49eba"
                 
-                entry1 = Entry(findwindow)
-                entry1.place(x = 200, y = 50)
+                entry_med = Entry(findwindow)
+                entry_med.place(x = 200, y = 50)
                 
                 button_op = Button(findwindow, text = "найти", command = med_find, font = "georgia 8")
                 button_op.place(x = 200, y = 90)
@@ -188,12 +204,12 @@ def find():
             
             case "ценовая категория":
                 
-                name = Label(findwindow, text = "введите цену", font = "georgia 8")
-                name.place(x = 200, y = 20)
-                name["bg"] = "#a49eba"
+                label_price = Label(findwindow, text = "введите цену", font = "georgia 8")
+                label_price.place(x = 200, y = 20)
+                label_price["bg"] = "#a49eba"
                
-                entry1 = Entry(findwindow)
-                entry1.place(x = 200, y = 50)
+                entry_price = Entry(findwindow)
+                entry_price.place(x = 200, y = 50)
                
                 button_op = Button(findwindow, text = "найти", command = price_find, font = "georgia 8")
                 button_op.place(x = 200, y = 90)
@@ -224,7 +240,7 @@ def find():
     button_q["bg"] = "#948eab"
     button_q["activebackground"] = "#730e1d"
     
-    button_mm = Button(findwindow, text = "вернуть в главное меню", command = mm, font = "georgia 8" )
+    button_mm = Button(findwindow, text = "вернуть в главное меню", command = mainmenu, font = "georgia 8" )
     button_mm.place(x = 250, y = 450)
     button_mm["bg"] = "#948eab"
     button_mm["activebackground"] = "#7f7994"
@@ -236,6 +252,7 @@ def find():
 def insert():
 
     def clear():
+
         ent_addr.delete(0, END)
         ent_cou.delete(0, END)
         ent_id.delete(0, END)
@@ -248,11 +265,13 @@ def insert():
         ent_title.delete(0, END)
         ent_town.delete(0, END)
 
-    def mm(): 
+    def mainmenu():
+
         ins.withdraw()
         window.deiconify()
 
-    def dob():
+    def dobav():
+
         try:
             newid = ent_id.get()
             newname = ent_name.get()
@@ -373,7 +392,7 @@ def insert():
     ent_pr = Entry(ins)
     ent_pr.place(x = 250, y = 220)
     
-    button_dob = Button(ins, text = "добавить", command = dob, font = "georgia 8" )
+    button_dob = Button(ins, text = "добавить", command = dobav, font = "georgia 8" )
     button_dob.place(x = 50, y = 400)
     button_dob["bg"] = "#948eab"
     button_dob["activebackground"] = "#7f7994"
@@ -388,22 +407,27 @@ def insert():
     button_q["bg"] = "#948eab"
     button_q["activebackground"] = "#730e1d"
     
-    button_mm = Button(ins, text = "вернуться в главное меню", command = mm, font = "georgia 8" )
+    button_mm = Button(ins, text = "вернуться в главное меню", command = mainmenu, font = "georgia 8" )
     button_mm.place(x = 230, y = 450)
     button_mm["bg"] = "#948eab"
     button_mm["activebackground"] = "#7f7994"
 
     ins.mainloop()
 
-def authorazi():
+def authorize():
+
     def autho():
+        
         log = ent_log.get()
         passw = ent_passw.get()
+       
         cursor.execute(f"SELECT * FROM admins WHERE log = '{log}' AND passw = '{passw}'")
         if not cursor.fetchone():
+            
             lab_err = Label(auth, text = "доступ запрещен", font = "georgia 8")
             lab_err["bg"] = "#a49eba"
             lab_err.place(x = 100, y = 170)
+            
             ent_log.delete(0, END)
             ent_passw.delete(0, END)
         else:
@@ -460,16 +484,16 @@ label_ins = Label(window, text = "добавить информацию о ху�
 label_ins.place(x = 200, y = 100)
 label_ins["bg"] = "#a49eba"
 
-button_ins = Button(text = "нажми меня :)", command = authorazi, font = "georgia 8")
+button_ins = Button(text = "нажми меня :)", command = authorize, font = "georgia 8")
 button_ins.place(x = 280, y = 120)
 button_ins["bg"] = "#948eab"
 button_ins["border"] = "2"
 button_ins["activebackground"] = "#7f7994"
 
-button_quite = Button(text = "выход", command = quit, font = "georgia 8" )
-button_quite.place(x = 400, y = 250)
-button_quite["bg"] = "#948eab"
-button_quite["activebackground"] = "#730e1d"
+button_quit = Button(text = "выход", command = quit, font = "georgia 8" )
+button_quit.place(x = 400, y = 250)
+button_quit["bg"] = "#948eab"
+button_quit["activebackground"] = "#730e1d"
 
 window.mainloop()
 db.close()

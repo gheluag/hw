@@ -10,3 +10,7 @@ sold   pieceID: 70  artistID: 34   title: revolution and world   medium: Waterco
  customer: альбина, phone number: 78787989988, delivery: самовывоз
 
 
+sold   pieceID: 54  artistID: 44   title: one more city   medium: Oil  price: 4536
+ customer: la, phone number: 686785, delivery: самовывоз
+
+

@@ -1,7 +1,7 @@
 import sqlite3
 from tkinter import *
 
-with sqlite3.connect("project/picture gallery.db") as db:
+with sqlite3.connect("picture gallery.db") as db:
     cursor = db.cursor()
 
 cursor.execute("""CREATE TABLE IF NOT EXISTS artist_info(

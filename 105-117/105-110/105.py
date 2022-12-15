@@ -1,0 +1,6 @@
+file = open("105-117/105-110/numbers.txt", "w")
+file.write("1,2,3,4,5")
+file.close()
+file = open("105-117/105-110/numbers.txt", "r")
+print(file.read())
+file.close()
